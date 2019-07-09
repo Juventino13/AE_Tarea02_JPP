@@ -143,5 +143,5 @@ module.exports = (Product) => {
         findId,
         DeleteById,
         updateProduct
-    })
-}
+    });
+}; 

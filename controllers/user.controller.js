@@ -99,14 +99,39 @@ const login = (req, res) => {
         });
 };
 
+const createCSV = async (req, res) => {
+    const csvFilePath =
+    "C:\\Users\\Juvetino_Asus\\Documents\\Verano 2019\\Aplicaciones Empresariales\\U3\\eje02\\usuarios.csv";
+    const csv = require("csvtojson");
+    csv()
+      .fromFile(csvFilePath)
+      .then(jsonObj => {
+        console.log(jsonObj);
+      });
+  
+    const jsonArray = await csv().fromFile(csvFilePath);
+  
+    _user
+      .create(jsonArray)
+      .then(data => {
+        res.status(200);
+        res.json({ msg: "Usuarios creados correctamente", data: data });
+      })
+      .catch(err => {
+        res.status(400);
+        res.json({ msg: "Error!!!!", data: err });
+      });
+  };
+
 module.exports = (User) => {
     _user = User;
     return ({
         createUser,
         findAll,
         deleteById,
-        login
+        login,
+        createCSV
     });
 
-}
+};
 

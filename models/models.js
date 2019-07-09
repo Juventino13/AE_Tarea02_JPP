@@ -1,26 +1,26 @@
-const mongoose = require('mongoose');
-const _ = require('underscore');
-const config = require('../_config');
+const mongoose = require("mongoose");
+const _ = require("underscore");
+const config = require("../_config");
 
-module.exports = (wagner) => {
-    mongoose.Promise = global.Promise;
-    mongoose.connect(`mongodb://localhost:27017/${config.DB}`, 
-    {useNewUrlParser:true});
-    
-    wagner.factory('db',()=>mongoose);
+module.exports = wagner => {
+  mongoose.Promise = global.Promise;
+  mongoose.connect(`mongodb://localhost:27017/${config.DB}`, {
+    useNewUrlParser: true
+  });
 
-    const User = require('./user.model');
-    const Brand = require('./brand.model');
-   // const Product = require('./product.model');
+  wagner.factory("db", () => mongoose);
 
-    const models = {
-        User,
-        Brand//,
-        //Product
-    }
+  const User = require("./user.model");
+  const Brand = require("./brand.model");
+  //- Product = require("./product.model");
 
-    _.each(models,(v, k) => {
-        wagner.factory(k, ()=>v);
-    })
+  const models = {
+    User,
+    Brand,
+  //  Product
+  };
 
-}
+  _.each(models, (v, k) => {
+    wagner.factory(k, () => v);
+  });
+};

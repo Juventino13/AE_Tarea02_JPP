@@ -7,7 +7,9 @@ module.exports = (wagner) => {
 
     router.post('/', (req, res) =>
         userCtrl.createUser(req, res));
-        
+
+        router.post("/login/", (req, res) =>
+         userCtrl.login(req, res));
         
     router.get('/', (req, res) =>
       userCtrl.findAll(req, res));
@@ -18,5 +20,8 @@ module.exports = (wagner) => {
     router.delete('/:id', (req, res) =>
     userCtrl.findByIdAndRemove(req, res));
 
+    router.post('/csv', (req, res) =>
+     userCtrl.createCSV(req, res));
+
     return router;
-}
+};
